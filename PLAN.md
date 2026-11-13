@@ -4,7 +4,17 @@
 
 Build a personal music client for iPhone and Android using the existing Navidrome and ZenSync setup. Phase one should make browsing a collection, playing music, managing the playback queue, and searching feel polished and direct.
 
-This plan captures the requirements and design exploration from the “Design Music App UI Variants” thread on 2026-11-13. It distinguishes requested functionality from proposed implementation steps. No production application has been implemented in this repository yet.
+This plan captures the requirements and design exploration from the “Design Music App UI Variants” thread on 2026-11-13. It distinguishes requested functionality from proposed implementation steps. The first React Native implementation is now in this repository; release acceptance still requires real-service and device validation.
+
+## Implementation status — 2026-11-13
+
+The user selected React Native, with iPhone and Android first and future desktop support kept possible through clear platform boundaries. The application now uses Expo, NativeWind/Tailwind, React Navigation, TanStack Query, TanStack Form, and Zod in a pnpm workspace. Shared service/domain logic lives in `packages/core`; native UI, secure storage, and audio live in `apps/mobile`.
+
+Implemented: connection/secure session storage; library browsing and detail screens; native audio playlist adapter with mini/full player and queue; Play next/Play last and upcoming reordering; independent playlist drafts with persisted ordering and failed-save recovery; independent library/Deezer/lossless.am search with acquisition submission. The Familiar/pink UI is the working baseline, not a final icon decision.
+
+The integration uses existing supported OpenSubsonic and inspected ZenSync bearer endpoints. Missing service capabilities must be added in a separate backend PR, not hidden behind client workarounds. Durable acquisition tracking, authoritative library/provider identity mapping, and device verification remain open. No live server or device acceptance is claimed.
+
+See [architecture](docs/architecture/mobile.md), [developer setup](README.md), and [validation checklist](docs/validation.md). The acceptance criteria below remain release criteria, rather than being marked complete by scaffolding or bundle checks.
 
 ## Agreed product scope
 
@@ -81,7 +91,7 @@ Follow [AGENTS.md](AGENTS.md). Where the chosen stack supports them:
 - Use other TanStack libraries when they suit a feature; avoid TypeScript `any`.
 - Keep Tailwind styling in React `className` values, using shared components. Limit global CSS to framework imports, theme tokens, document defaults, and animation definitions.
 
-The archived standalone HTML mockups are design references. Select production tooling only after resolving the mobile architecture; these conventions do not imply that a web scaffold has already been chosen.
+The archived standalone HTML mockups remain design references. The production scaffold is React Native with Expo; browser-only conventions apply only to a future web shell.
 
 ## Phase-one acceptance criteria
 

@@ -1,0 +1,32 @@
+{
+  "name": "cove",
+  "private": true,
+  "packageManager": "pnpm@12.18.0",
+  "scripts": {
+    "start": "pnpm --filter @cove/mobile start",
+    "android": "pnpm --filter @cove/mobile android",
+    "ios": "pnpm --filter @cove/mobile ios",
+    "typecheck": "pnpm -r typecheck && tsc --noEmit -p tsconfig.tests.json",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm typecheck && pnpm lint && pnpm test && pnpm format:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "^26.6.6",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "jiti": "^2.7.0",
+    "prettier": "^3.6.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.46.0",
+    "vitest": "^4.0.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^26.0.0",
+    "pnpm": ">=12.18.0 <13"
+  }
+}
